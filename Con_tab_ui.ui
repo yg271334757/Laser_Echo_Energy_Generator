@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>995</width>
+    <width>1022</width>
     <height>706</height>
    </rect>
   </property>
@@ -22,6 +22,38 @@
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QLineEdit" name="Set_Gate_Width">
+             <property name="placeholderText">
+              <string>请输入选通门宽,精确到0.1</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="Show_Gate">
+             <property name="text">
+              <string>生成选通门</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QGraphicsView" name="GraphicsView_Gate"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Save_Gate">
+           <property name="text">
+            <string>保存选通门</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
            <item>
             <widget class="QTabWidget" name="tabWidget">
              <property name="sizePolicy">
@@ -39,7 +71,7 @@
               </attribute>
               <layout class="QHBoxLayout" name="horizontalLayout_2">
                <item>
-                <widget class="QLineEdit" name="Set__Laser_Width">
+                <widget class="QLineEdit" name="Set_Laser_Width">
                  <property name="toolTip">
                   <string>11111</string>
                  </property>
@@ -58,35 +90,9 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout">
                  <item>
-                  <widget class="QLineEdit" name="Set_Miu">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="placeholderText">
-                    <string>请输入μ,精确到0.1</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
                   <widget class="QLineEdit" name="lineEdit">
                    <property name="placeholderText">
-                    <string>请输入激光脉宽,精确到0.1</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="Set_Sigma">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="placeholderText">
-                    <string>请输入σ,精确到0.1</string>
+                    <string>请输入激光脉宽(半高宽),精确到0.1</string>
                    </property>
                   </widget>
                  </item>
@@ -112,38 +118,6 @@
           <widget class="QPushButton" name="Save_Laser">
            <property name="text">
             <string>保存激光脉冲</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_5">
-           <item>
-            <widget class="QLineEdit" name="Set_Gate_Width">
-             <property name="placeholderText">
-              <string>请输入选通门宽,精确到0.1</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="Show_Gate">
-             <property name="text">
-              <string>生成选通门</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <widget class="QGraphicsView" name="GraphicsView_Gate"/>
-         </item>
-         <item>
-          <widget class="QPushButton" name="Save_Gate">
-           <property name="text">
-            <string>保存选通门</string>
            </property>
           </widget>
          </item>
