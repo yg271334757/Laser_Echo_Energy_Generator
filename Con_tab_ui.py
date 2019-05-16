@@ -104,7 +104,7 @@ class Cal_Con(QWidget, Ui_Form):
         """
         try:
             self.index = self.tabWidget.currentIndex()
-            if self.index == 0:
+            if self.index == 0: # 将激光脉冲看作矩形函数
                 self.num_laser = len(self.x_lim)
                 self.laser_width = float(self.Set_Laser_Width.text())
                 self.laser = self.gate_function(
@@ -126,7 +126,7 @@ class Cal_Con(QWidget, Ui_Form):
                 graphicscene_laser.addWidget(dr)
                 self.GraphicsView_Laser.setScene(graphicscene_laser)
                 self.GraphicsView_Laser.show()
-            elif self.index == 1:
+            elif self.index == 1: # 将激光脉冲看作高斯脉冲
                 self.miu = 0
                 self.laser_width = float(self.Set_Sigma.text())
                 self.num_laser = len(self.x_lim)
