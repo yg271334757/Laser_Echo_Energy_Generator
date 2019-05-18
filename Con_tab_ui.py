@@ -175,12 +175,10 @@ class Cal_Con(QWidget, Ui_Form):
         显示回波能量
         """
         try:
-            num = self.num_gate + self.num_laser - 1
-            con_result = signal.convolve(self.laser, self.gate, mode='full')
-            res = (con_result - con_result.min()) / \
-                (con_result.max() - con_result.min())
-            x = np.linspace(- (self.laser_width + self.gate_width),
-                            (self.laser_width + self.gate_width), num)
+            con_result = signal.convolve(self.laser, self.gate, mode='same')
+            res = (con_result - con_result.min()) / (con_result.max() - con_result.min())
+            x = np.linspace(- (self.gate_width),
+                            self.gate_width, self.num_gate)
             fig = Figure()
             self.ax_res = fig.add_subplot(111)
             self.ax_res.set_xlim([- (self.laser_width + self.gate_width),
@@ -209,7 +207,7 @@ class Cal_Con(QWidget, Ui_Form):
             file_path = QFileDialog.getSaveFileName(
                 self, 'save file', 'C:\\Users\\Sai\\Desktop', 'image files(*.jpg *.bmp)')[0]
             saving = self.ax_res.figure.savefig(file_path, dpi=600)
-            if saving == None:
+            if file_path:
                 QMessageBox.information(self, '提示', '保存卷积结果成功', QMessageBox.Ok)
             else:
                 QMessageBox.information(self, '提示', '保存卷积结果失败', QMessageBox.Ok)
