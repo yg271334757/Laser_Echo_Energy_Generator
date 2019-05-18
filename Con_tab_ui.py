@@ -4,6 +4,13 @@
 Module implementing Cal_Con.
 """
 
+import sys
+from Ui_Con_tab_ui import Ui_Form
+from scipy import signal
+from math import sqrt, pi
+import numpy as np
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from PyQt5.QtCore import pyqtSlot
 
 from PyQt5.QtWidgets import QWidget, QApplication, QGraphicsScene, QMessageBox, QFileDialog
@@ -11,15 +18,6 @@ import matplotlib
 matplotlib.use('Qt5Agg')
 matplotlib.rcParams['xtick.direction'] = 'in'  # 将x轴的刻度线设置为朝内
 matplotlib.rcParams['ytick.direction'] = 'in'  # 将y轴的刻度线设置为朝内
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.figure import Figure
-
-import numpy as np
-from math import sqrt, pi
-from scipy import signal
-
-from Ui_Con_tab_ui import Ui_Form
-import sys
 
 
 class Cal_Con(QWidget, Ui_Form):
@@ -50,7 +48,8 @@ class Cal_Con(QWidget, Ui_Form):
         # 1. / (sqrt(2. * pi) * sig) 为尖峰的高度
         # mu为尖峰中心坐标
         # sig为标准方差，表征宽度
-        return 1. / (sqrt(2. * pi) * sig) * np.exp(-np.power((x - mu) / sig, 2.) / 2)
+        return 1. / (sqrt(2. * pi) * sig) * \
+            np.exp(-np.power((x - mu) / sig, 2.) / 2)
 
     @pyqtSlot()
     def on_Show_Gate_clicked(self):
@@ -78,7 +77,7 @@ class Cal_Con(QWidget, Ui_Form):
             graphicscene.addWidget(dr)
             self.GraphicsView_Gate.setScene(graphicscene)
             self.GraphicsView_Gate.show()
-        except:
+        except BaseException:
             QMessageBox.information(self, '错误', '请输入选通门宽度', QMessageBox.Ok)
 
     @pyqtSlot()
@@ -90,7 +89,7 @@ class Cal_Con(QWidget, Ui_Form):
             file_path = QFileDialog.getSaveFileName(
                 self, 'save file', 'C:\\Users\\Sai\\Desktop', 'image files(*.jpg *.bmp)')[0]
             saving = self.ax_gate.figure.savefig(file_path, dpi=600)
-            if saving == None:
+            if file_path:
                 QMessageBox.information(self, '提示', '保存选通门成功', QMessageBox.Ok)
             else:
                 QMessageBox.information(self, '提示', '保存选通门失败', QMessageBox.Ok)
@@ -104,7 +103,7 @@ class Cal_Con(QWidget, Ui_Form):
         """
         try:
             self.index = self.tabWidget.currentIndex()
-            if self.index == 0: # 将激光脉冲看作矩形函数
+            if self.index == 0:  # 将激光脉冲看作矩形函数
                 self.num_laser = len(self.x_lim)
                 self.laser_width = float(self.Set_Laser_Width.text())
                 self.laser = self.gate_function(
@@ -126,7 +125,7 @@ class Cal_Con(QWidget, Ui_Form):
                 graphicscene_laser.addWidget(dr)
                 self.GraphicsView_Laser.setScene(graphicscene_laser)
                 self.GraphicsView_Laser.show()
-            elif self.index == 1: # 将激光脉冲看作高斯脉冲
+            elif self.index == 1:  # 将激光脉冲看作高斯脉冲
                 self.miu = 0
                 self.laser_width = float(self.Set_Sigma.text())
                 self.num_laser = len(self.x_lim)
@@ -150,7 +149,7 @@ class Cal_Con(QWidget, Ui_Form):
                 graphicscene_laser.addWidget(dr)
                 self.GraphicsView_Laser.setScene(graphicscene_laser)
                 self.GraphicsView_Laser.show()
-        except:
+        except BaseException:
             QMessageBox.information(self, '错误', '请输入激光脉冲宽度', QMessageBox.Ok)
 
     @pyqtSlot()
@@ -162,7 +161,7 @@ class Cal_Con(QWidget, Ui_Form):
             file_path = QFileDialog.getSaveFileName(
                 self, 'save file', 'C:\\Users\\Sai\\Desktop', 'image files(*.jpg *.bmp)')[0]
             saving = self.ax_laser.figure.savefig(file_path, dpi=600)
-            if saving == None:
+            if file_path:
                 QMessageBox.information(self, '提示', '保存激光脉宽成功', QMessageBox.Ok)
             else:
                 QMessageBox.information(self, '提示', '保存激光失败', QMessageBox.Ok)
@@ -176,7 +175,8 @@ class Cal_Con(QWidget, Ui_Form):
         """
         try:
             con_result = signal.convolve(self.laser, self.gate, mode='same')
-            res = (con_result - con_result.min()) / (con_result.max() - con_result.min())
+            res = (con_result - con_result.min()) / \
+                (con_result.max() - con_result.min())
             x = np.linspace(- (self.gate_width),
                             self.gate_width, self.num_gate)
             fig = Figure()
@@ -193,10 +193,9 @@ class Cal_Con(QWidget, Ui_Form):
             self.GraphicsView_Res.setScene(graphicscene)
             self.GraphicsView_Res.show()
 
-        except:
+        except BaseException:
             QMessageBox.information(
                 self, '错误', '请先输入激光宽度和选通门宽度', QMessageBox.Ok)
-
 
     @pyqtSlot()
     def on_Save_Res_clicked(self):
