@@ -87,7 +87,7 @@ class Cal_Con(QWidget, Ui_Form):
         """
         try:
             file_path = QFileDialog.getSaveFileName(
-                self, 'save file', 'C:\\Users\\Sai\\Desktop', 'image files(*.jpg *.bmp)')[0]
+                self, 'save file', 'C:\\Users\\Sai\\Desktop', 'image files(*.png *.eps)')[0]
             saving = self.ax_gate.figure.savefig(file_path, dpi=600)
             if file_path:
                 QMessageBox.information(self, '提示', '保存选通门成功', QMessageBox.Ok)
@@ -159,7 +159,7 @@ class Cal_Con(QWidget, Ui_Form):
         """
         try:
             file_path = QFileDialog.getSaveFileName(
-                self, 'save file', 'C:\\Users\\Sai\\Desktop', 'image files(*.jpg *.bmp)')[0]
+                self, 'save file', 'C:\\Users\\Sai\\Desktop', 'image files(*.png *.eps)')[0]
             saving = self.ax_laser.figure.savefig(file_path, dpi=600)
             if file_path:
                 QMessageBox.information(self, '提示', '保存激光脉宽成功', QMessageBox.Ok)
@@ -204,7 +204,7 @@ class Cal_Con(QWidget, Ui_Form):
         """
         try:
             file_path = QFileDialog.getSaveFileName(
-                self, 'save file', 'C:\\Users\\Sai\\Desktop', 'image files(*.jpg *.bmp)')[0]
+                self, 'save file', 'C:\\Users\\Sai\\Desktop', 'image files(*.png *.eps)')[0]
             saving = self.ax_res.figure.savefig(file_path, dpi=600)
             if file_path:
                 QMessageBox.information(self, '提示', '保存卷积结果成功', QMessageBox.Ok)
